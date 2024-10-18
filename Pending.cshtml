@@ -1,0 +1,15 @@
+﻿<h2>Pending Claims</h2>
+
+@foreach (var claim in Model.PendingClaims)
+{
+    <div>
+        <p>Lecturer: @claim.LecturerName</p>
+        <p>Hours Worked: @claim.HoursWorked</p>
+        <p>Hourly Rate: @claim.HourlyRate</p>
+        <p>Total Amount: @(claim.HoursWorked * claim.HourlyRate)</p>
+        <p>Status: @claim.Status</p>
+
+        <button onclick="location.href='@Url.Action("Approve", "Claims", new { id = claim.Id })'">Approve</button>
+        <button onclick="location.href='@Url.Action("Reject", "Claims", new { id = claim.Id })'">Reject</button>
+    </div>
+}

@@ -1,0 +1,39 @@
+﻿@model List<Claim>
+
+<h2>Verify Claims</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Title</th>
+            <th>HourlyRate</th>
+            <th>HoursWorked</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var claim in Model)
+    {
+        <tr>
+            <td>@claim.ClaimId</td>
+            <td>@claim.Title</td>
+            <td>@claim.HourlyRate</td>
+            <td>@claim.HoursWorked</td>
+            <td>@claim.Status</td>
+            <td>@claim.CreatedAt</td>
+            <td>
+                <form asp-action="ApproveClaim" method="post">
+                    <input type="hidden" name="claimId" value="@claim.ClaimId" />
+                    <button type="submit" class="btn btn-success">Approve</button>
+                </form>
+                <form asp-action="RejectClaim" method="post">
+                    <input type="hidden" name="claimId" value="@claim.ClaimId" />
+                    <button type="submit" class="btn btn-danger">Reject</button>
+                </form>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

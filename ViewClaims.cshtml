@@ -1,0 +1,45 @@
+﻿@model List<PROGPART1.Models.Claim>
+
+@{
+    ViewData["Title"] = "View Claims";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>View Claims</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Claim ID</th>
+            <th>Title</th>
+            <th>HoursWorked</th>
+            <th>HourlyRate</th>
+            <th>Status</th>
+            <th>Created At</th>
+            <th>Document Path</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var claim in Model)
+        {
+            <tr>
+                <td>@claim.ClaimId</td>
+                <td>@claim.Title</td>
+                <td>@claim.HoursWorked</td>
+                <td>@claim.HourlyRate</td>
+                <td>@claim.Status</td>
+                <td>@claim.CreatedAt.ToShortDateString()</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(claim.SupportingDocumentPath))
+                    {
+                        <a href="@Url.Content("~/" + claim.SupportingDocumentPath)" target="_blank">View Document</a>
+                    }
+                    else
+                    {
+                        <span>No Document</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
